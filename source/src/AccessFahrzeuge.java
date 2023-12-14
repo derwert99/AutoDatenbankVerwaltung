@@ -1,4 +1,4 @@
-public static class AccessFahrzeuge {
+public class AccessFahrzeuge {
 
 
 
