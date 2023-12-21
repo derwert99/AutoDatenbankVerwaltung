@@ -12,18 +12,15 @@ public  class AccessCredentials {
 
         String jdbcUrl = "jdbc:sqlite:" + credentialsPfad;
 
-        String sql = "SELECT * FROM credentials WHERE username = ? AND password = ?";
+        String sql = "SELECT * FROM users WHERE username = ? AND password = ?";
 
         try (Connection connection = DriverManager.getConnection(jdbcUrl);
              PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
 
-
             preparedStatement.setString(1, username);
             preparedStatement.setString(2, password);
 
-
             ResultSet resultSet = preparedStatement.executeQuery();
-
 
             if (resultSet.next()) {
                 System.out.println("Zugriff gewährt. Willkommen, " + username + "!");
@@ -38,4 +35,5 @@ public  class AccessCredentials {
 
         return false;
     }
+
 }
