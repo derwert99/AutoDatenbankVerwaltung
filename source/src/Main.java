@@ -66,6 +66,10 @@ public class Main {
             }
 
 
+
+
+
+
             // Nur ein Test
             Automodell automodell = new Automodell("Skoda", "Octavia", "Hellblau", "Hybrid", "Automatik-Getriebe", 180);
             Motorradmodell motorradmodell = new Motorradmodell("Derbi", "Kenn Keine", "Knallrot", "Benzin", "6-Gang-Manuellgetriebe", 300);
