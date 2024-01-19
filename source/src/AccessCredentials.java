@@ -1,14 +1,15 @@
 import java.sql.*;
 
-public  class AccessCredentials {
+public class AccessCredentials {
 
 
-
-
-
-    public static boolean checkCredentials(String username, String password)  {
+    public static boolean checkCredentials(String username, String password) {
 
         String credentialsPfad = "C:\\Users\\43660\\OneDrive - Fachhochschule Burgenland GmbH\\Semester 3\\Programmiertechniken\\Gruppenarbeit\\Git\\AutoDatenbankVerwaltung\\source\\DataStore\\credentials.db";
+
+        //Verfügbare Credentials, es sei denn, jemand hat andere hinzugefügt
+        // Thomas Kirschner|password123
+        // Benjamin Böhm|password123
 
         String jdbcUrl = "jdbc:sqlite:" + credentialsPfad;
 
