@@ -11,11 +11,23 @@ public class AccessFahrzeuge {
     private static String geparkteAutosPfad = "C:\\Users\\43660\\OneDrive - Fachhochschule Burgenland GmbH\\Semester 3\\Programmiertechniken\\Gruppenarbeit\\Git\\AutoDatenbankVerwaltung\\source\\DataStore\\GeparkteAutos.db";
     private static String geparkteMotorraderPfad = "C:\\Users\\43660\\OneDrive - Fachhochschule Burgenland GmbH\\Semester 3\\Programmiertechniken\\Gruppenarbeit\\Git\\AutoDatenbankVerwaltung\\source\\DataStore\\GeparkteMotorrader.db";
 
+
+    public static void accessMotorradmodell(String nummertafel) {
+    }
+
+    public static void accessAutomodell(String nummertafel) {
+    }
+
+    public static void deleteMotorradmodell(String nummertafel) {
+    }
+
+    public static void deleteAutomodell(String nummertafel) {
+    }
+
     public static List<Automodell> loadAutomodelle(List<Automodell> automodelleList) throws SQLException {
 
         // schema der Datenbank:
         // Automodelle (Automarke varchar(25),Automodell varchar(25), Farbe varchar(15), Kraftstoff varchar(15), Getriebe varchar(30),ps int);
-
 
         try (Connection connection = DriverManager.getConnection("jdbc:sqlite:" + automodellePfad);
              PreparedStatement preparedStatement = ((java.sql.Connection) connection).prepareStatement("SELECT * FROM Automodelle");
@@ -104,17 +116,6 @@ public class AccessFahrzeuge {
     }
 
 
-    public static void accessMotorradmodell(String nummertafel) {
-    }
-
-    public static void accessAutomodell(String nummertafel) {
-    }
-
-    public static void deleteMotorradmodell(String nummertafel) {
-    }
-
-    public static void deleteAutomodell(String nummertafel) {
-    }
 
     public static void autoParken(List<Automodell> automodelleList) throws SQLException {
 
