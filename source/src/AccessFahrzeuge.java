@@ -57,7 +57,7 @@ public class AccessFahrzeuge {
 //        Motorradmodelle (Motorradmarke varchar(25), Motorradmodell varchar(25), Farbe varchar(15), Kraftstoff varchar(15), Getriebe varchar(30), ps int);
 
 
-        try (Connection connection = DriverManager.getConnection(motorradmodellePfad);
+        try (Connection connection = DriverManager.getConnection("jdbc:sqlite:" + motorradmodellePfad);
              PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM Motorradmodelle");
              ResultSet resultSet = preparedStatement.executeQuery()) {
 

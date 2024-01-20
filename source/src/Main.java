@@ -27,14 +27,15 @@ public class Main {
         }
         LoadVehicleFeatures.LadeListen();
 
+        boolean exitProgramm = false;
+
 
         if (loggedIn) {
 
-            boolean exitProgramm = false;
+
 
 
             while (!exitProgramm) {
-
 
                 List<Motorradmodell> motorradmodellList = new ArrayList<>();
                 AccessFahrzeuge.loadMotorradmodelle(motorradmodellList);
@@ -61,7 +62,7 @@ public class Main {
                 System.out.println("Motorrad aus Garage entfernen -> M");
                 System.out.println("Exit -> E");
 
-                String choice = scanner.nextLine();
+                String choice = scanner.nextLine().toUpperCase();
                 String nummertafel = "";
 
                 switch (choice) {
