@@ -5,79 +5,91 @@ import java.util.Scanner;
 public class AccessFahrzeuge {
 
 
-    private static String automodellePfad = "C:\\Users\\43660\\OneDrive - Fachhochschule Burgenland GmbH\\Semester 3\\Programmiertechniken\\Gruppenarbeit\\Git\\AutoDatenbankVerwaltung\\source\\DataStore\\Automodelle.db";
-    private static String motorradmodellePfad = "C:\\Users\\43660\\OneDrive - Fachhochschule Burgenland GmbH\\Semester 3\\Programmiertechniken\\Gruppenarbeit\\Git\\AutoDatenbankVerwaltung\\source\\DataStore\\Motorradmodelle.db";
-
-    private static String geparkteAutosPfad = "C:\\Users\\43660\\OneDrive - Fachhochschule Burgenland GmbH\\Semester 3\\Programmiertechniken\\Gruppenarbeit\\Git\\AutoDatenbankVerwaltung\\source\\DataStore\\GeparkteAutos.db";
-    private static String geparkteMotorraderPfad = "C:\\Users\\43660\\OneDrive - Fachhochschule Burgenland GmbH\\Semester 3\\Programmiertechniken\\Gruppenarbeit\\Git\\AutoDatenbankVerwaltung\\source\\DataStore\\GeparkteMotorrader.db";
 
 
-    public static void accessMotorradmodell(String nummertafel) {
-    }
 
-    public static void accessAutomodell(String nummertafel) {
-    }
+    private static String automodellePfad ="C:\\Users\\43660\\OneDrive - Fachhochschule Burgenland GmbH\\Semester 3\\Programmiertechniken\\Gruppenarbeit\\Git\\AutoDatenbankVerwaltung\\source\\DataStore\\automodelle.db";
 
-    public static void deleteMotorradmodell(String nummertafel) {
-    }
-
-    public static void deleteAutomodell(String nummertafel) {
-    }
-
-    public static List<Automodell> loadAutomodelle(List<Automodell> automodelleList) throws SQLException {
-
-        // schema der Datenbank:
-        // Automodelle (Automarke varchar(25),Automodell varchar(25), Farbe varchar(15), Kraftstoff varchar(15), Getriebe varchar(30),ps int);
-
-        try (Connection connection = DriverManager.getConnection("jdbc:sqlite:" + automodellePfad);
-             PreparedStatement preparedStatement = ((java.sql.Connection) connection).prepareStatement("SELECT * FROM Automodelle");
-             ResultSet resultSet = preparedStatement.executeQuery()) {
-
-            while (resultSet.next()) {
-                String automarke = resultSet.getString("Automarke");
-                String automodell = resultSet.getString("Automodell");
-                String farbe = resultSet.getString("Farbe");
-                String kraftstoff = resultSet.getString("Kraftstoff");
-                String getriebe = resultSet.getString("Getriebe");
-                int ps = resultSet.getInt("ps");
-
-                Automodell automodellObj = new Automodell(automarke, automodell, farbe, kraftstoff, getriebe, ps);
-                automodelleList.add(automodellObj);
-
-                // Ausgabe als Beispiel
-                System.out.println("Automodell: " + automodellObj.getAutomodell());
-            }
-        }
-        return automodelleList;
-    }
-
-    public static List<Motorradmodell> loadMotorradmodelle(List<Motorradmodell> motorradmodellList) throws SQLException {
-
-//        schema der Datenbank
-//        Motorradmodelle (Motorradmarke varchar(25), Motorradmodell varchar(25), Farbe varchar(15), Kraftstoff varchar(15), Getriebe varchar(30), ps int);
+    private static String motorradmodellePfad = "C:\\Users\\43660\\OneDrive - Fachhochschule Burgenland GmbH\\Semester 3\\Programmiertechniken\\Gruppenarbeit\\Git\\AutoDatenbankVerwaltung\\source\\DataStore\\motorradmodelle.db";
 
 
-        try (Connection connection = DriverManager.getConnection("jdbc:sqlite:" + motorradmodellePfad);
-             PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM Motorradmodelle");
-             ResultSet resultSet = preparedStatement.executeQuery()) {
 
-            while (resultSet.next()) {
-                String motorradmarke = resultSet.getString("Motorradmarke");
-                String motorradmodell = resultSet.getString("Motorradmodell");
-                String farbe = resultSet.getString("Farbe");
-                String kraftstoff = resultSet.getString("Kraftstoff");
-                String getriebe = resultSet.getString("Getriebe");
-                int ps = resultSet.getInt("ps");
+//    public static void accessMotorradmodell(String nummertafel) {
+//    }
+//
+//    public static void accessAutomodell(String nummertafel) {
+//    }
+//
+//    public static void deleteMotorradmodell(String nummertafel) {
+//    }
+//
+//    public static void deleteAutomodell(String nummertafel) {
+//    }
 
-                Motorradmodell motorradmodellObj = new Motorradmodell(motorradmarke, motorradmodell, farbe, kraftstoff, getriebe, ps);
-                motorradmodellList.add(motorradmodellObj);
 
-                // Ausgabe als Beispiel
-                System.out.println("Motorradmodell: " + motorradmodellObj.getMotorradmodell());
-            }
-        }
-        return motorradmodellList;
-    }
+    // todo methoden nach benjis menu
+    public static void create (){}
+    public static void read (){}
+    public static void  update (){}
+    public static void delete (){}
+
+//    public static List<Automodell> loadAutomodelle(List<Automodell> automodelleList) throws SQLException {
+//
+//        // schema der Datenbank:
+//        // Automodelle (Automarke varchar(25),Automodell varchar(25), Farbe varchar(15), Kraftstoff varchar(15), Getriebe varchar(30),ps int);
+//
+//        try (Connection connection = DriverManager.getConnection("jdbc:sqlite:" + automodellePfad);
+//             PreparedStatement preparedStatement = ((java.sql.Connection) connection).prepareStatement("SELECT * FROM Automodelle");
+//             ResultSet resultSet = preparedStatement.executeQuery()) {
+//
+//            while (resultSet.next()) {
+//                String automarke = resultSet.getString("Automarke");
+//                String automodell = resultSet.getString("Automodell");
+//                String farbe = resultSet.getString("Farbe");
+//                String kraftstoff = resultSet.getString("Kraftstoff");
+//                String getriebe = resultSet.getString("Getriebe");
+//                int ps = resultSet.getInt("ps");
+//
+//                Automodell automodellObj = new Automodell(automarke, automodell, farbe, kraftstoff, getriebe, ps);
+//                automodelleList.add(automodellObj);
+//
+//                // Ausgabe als Beispiel
+//                System.out.println("Automodell: " + automodellObj.getAutomodell());
+//            }
+//        }
+//        return automodelleList;
+//    }
+
+//    public static List<Motorradmodell> loadMotorradmodelle(List<Motorradmodell> motorradmodellList) throws SQLException {
+//
+////        schema der Datenbank
+////        Motorradmodelle (Motorradmarke varchar(25), Motorradmodell varchar(25), Farbe varchar(15), Kraftstoff varchar(15), Getriebe varchar(30), ps int);
+//
+//
+//        try (Connection connection = DriverManager.getConnection("jdbc:sqlite:" + motorradmodellePfad);
+//             PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM Motorradmodelle");
+//             ResultSet resultSet = preparedStatement.executeQuery()) {
+//
+//            while (resultSet.next()) {
+//                String motorradmarke = resultSet.getString("Motorradmarke");
+//                String motorradmodell = resultSet.getString("Motorradmodell");
+//                String farbe = resultSet.getString("Farbe");
+//                String kraftstoff = resultSet.getString("Kraftstoff");
+//                String getriebe = resultSet.getString("Getriebe");
+//                int ps = resultSet.getInt("ps");
+//
+//                Motorradmodell motorradmodellObj = new Motorradmodell(motorradmarke, motorradmodell, farbe, kraftstoff, getriebe, ps);
+//                motorradmodellList.add(motorradmodellObj);
+//
+//                // Ausgabe als Beispiel
+//                System.out.println("Motorradmodell: " + motorradmodellObj.getMotorradmodell());
+//            }
+//        }
+//        return motorradmodellList;
+//    }
+
+
+    //Todo remove Lists
 
     public static List<GeparkteAutos> loadGeparkteAutos(List<GeparkteAutos> geparkteAutosList) throws SQLException {
 
@@ -97,23 +109,23 @@ public class AccessFahrzeuge {
         return geparkteAutosList;
     }
 
-    public static List<GeparkteMotorrader> loadGeparkteMotorrader(List<GeparkteMotorrader> geparkteMotorraderList) throws SQLException {
-
-        try (Connection connection = DriverManager.getConnection("jdbc:sqlite:" + geparkteMotorraderPfad);
-             Statement statement = connection.createStatement();
-             ResultSet resultSet = statement.executeQuery("SELECT * FROM GeparkteMotorrader")) {
-
-            while (resultSet.next()) {
-                String nummertafel = resultSet.getString("Nummertafel");
-                String motorradmodell = resultSet.getString("Motorradmodell");
-
-                GeparkteMotorrader geparktesMotorrad = new GeparkteMotorrader(nummertafel, motorradmodell);
-                geparkteMotorraderList.add(geparktesMotorrad);
-            }
-        }
-
-        return geparkteMotorraderList;
-    }
+//    public static List<GeparkteMotorrader> loadGeparkteMotorrader(List<GeparkteMotorrader> geparkteMotorraderList) throws SQLException {
+//
+//        try (Connection connection = DriverManager.getConnection("jdbc:sqlite:" + geparkteMotorraderPfad);
+//             Statement statement = connection.createStatement();
+//             ResultSet resultSet = statement.executeQuery("SELECT * FROM GeparkteMotorrader")) {
+//
+//            while (resultSet.next()) {
+//                String nummertafel = resultSet.getString("Nummertafel");
+//                String motorradmodell = resultSet.getString("Motorradmodell");
+//
+//                GeparkteMotorrader geparktesMotorrad = new GeparkteMotorrader(nummertafel, motorradmodell);
+//                geparkteMotorraderList.add(geparktesMotorrad);
+//            }
+//        }
+//
+//        return geparkteMotorraderList;
+//    }
 
 
 
@@ -212,6 +224,11 @@ public class AccessFahrzeuge {
         }
     }
 
+
+
+
+    // todo muss der Klasse Autmodell und Benjis menu dementsprechend angepasst werden
+
     public static void automodellErstellen() {
         Scanner scanner = new Scanner(System.in);
 
@@ -235,6 +252,8 @@ public class AccessFahrzeuge {
         System.out.print("PS: ");
         int ps = scanner.nextInt();
         scanner.nextLine();
+
+
 
 
         Automodell neuesAutomodell = new Automodell(automarke, automodell, farbe, kraftstoff, getriebe, ps);
@@ -263,6 +282,9 @@ public class AccessFahrzeuge {
         }
     }
 
+
+
+    // todo muss der Klasse Motorradmodel und Benjis menu dementsprechend angepasst werden
     public static void motorradmodellErstellen() {
 
         Scanner scanner = new Scanner(System.in);
@@ -315,6 +337,9 @@ public class AccessFahrzeuge {
         }
     }
 
+
+    // todo weiß noch nicht ob behalten werden soll - eventuell remove
+
     public static void autoAusparken(List<GeparkteAutos> geparkteAutosList) {
 
         try (Connection connection = DriverManager.getConnection("jdbc:sqlite:" + geparkteAutosPfad)) {
@@ -354,7 +379,7 @@ public class AccessFahrzeuge {
         }
     }
 
-
+// todo weiß nicht ob behalten werden soll - eventuell remove
     public static void motorradAusparken(List<GeparkteMotorrader> geparkteMotorraderList) {
 
         try (Connection connection = DriverManager.getConnection("jdbc:sqlite:" + geparkteMotorraderPfad)) {

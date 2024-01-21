@@ -1,17 +1,17 @@
 public class Motorradmarke extends Motorrad {
 
-    private String motorradmarke;
+    private String marke;
 
-    public Motorradmarke(String farbe, String kraftstoff, String getriebe, int ps, String motorradmarke) {
+    public Motorradmarke(String farbe, String kraftstoff, String getriebe, int ps, String marke) {
         super(farbe, kraftstoff, getriebe, ps);
-        this.motorradmarke = motorradmarke;
+        this.marke = marke;
     }
 
-    public String getMotorradmarke() {
-        return motorradmarke;
+    public String getMarke() {
+        return marke;
     }
 
-    public void setMotorradmarke(String motorradmarke) {
-        this.motorradmarke = motorradmarke;
+    public void setMarke(String marke) {
+        this.marke = marke;
     }
 }

@@ -1,17 +1,17 @@
 public class Automarke extends Auto{
 
-    private String automarke;
+    private String marke;
 
-    public Automarke(String farbe, String kraftstoff, String getriebe, int ps, String automarke) {
+    public Automarke(String farbe, String kraftstoff, String getriebe, int ps, String marke) {
         super(farbe, kraftstoff, getriebe, ps);
-        this.automarke = automarke;
+        this.marke = marke;
     }
 
-    public String getAutomarke() {
-        return automarke;
+    public String getMarke() {
+        return marke;
     }
 
-    public void setAutomarke(String automarke) {
-        this.automarke = automarke;
+    public void setMarke(String marke) {
+        this.marke = marke;
     }
 }
