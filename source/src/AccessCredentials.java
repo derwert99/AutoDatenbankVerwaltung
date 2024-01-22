@@ -1,3 +1,4 @@
+import java.io.InputStream;
 import java.sql.*;
 
 public class AccessCredentials {
@@ -5,13 +6,19 @@ public class AccessCredentials {
 
     public static boolean checkCredentials(String username, String password) {
 
-        String credentialsPfad = "C:\\Users\\43660\\OneDrive - Fachhochschule Burgenland GmbH\\Semester 3\\Programmiertechniken\\Gruppenarbeit\\Git\\AutoDatenbankVerwaltung\\source\\DataStore\\credentials.db";
+        InputStream credentialsStream = AccessCredentials.class.getClassLoader().getResourceAsStream("DataStore/credentials.db");
+
+        if (credentialsStream == null) {
+            System.err.println("Fehler beim Laden der credentials.db-Datei.");
+            return false;
+        }
+
 
         //Verfügbare Credentials, es sei denn, jemand hat andere hinzugefügt
         // Thomas Kirschner|password123
         // Benjamin Böhm|password123
 
-        String jdbcUrl = "jdbc:sqlite:" + credentialsPfad;
+        String jdbcUrl = "jdbc:sqlite::memory:";
 
         String sql = "SELECT * FROM users WHERE username = ? AND password = ?";
 

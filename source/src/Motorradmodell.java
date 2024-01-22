@@ -1,8 +1,7 @@
-public class Motorradmodell extends Motorradmarke{
+public class Motorradmodell extends Motorradmarke {
 
     private String kennzeichen;
     private String modell;
-
 
     public Motorradmodell(String kennzeichen, String marke, String modell, String farbe, int ps, String kraftstoff, String getriebe) {
         super(farbe, kraftstoff, getriebe, ps, marke);

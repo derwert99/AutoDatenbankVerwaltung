@@ -1,10 +1,7 @@
 public class Automodell extends Automarke {
 
-
     private String kennzeichen;
-
     private String modell;
-
 
     public Automodell(String kennzeichen, String marke, String modell, String farbe, int ps, String kraftstoff, String getriebe) {
         super(farbe, kraftstoff, getriebe, ps, marke);

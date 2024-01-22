@@ -1,14 +1,9 @@
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 public class Main {
 
     public static void main(String[] args) throws SQLException {
-
-
-        // todo muss dementsprechend an benjis menu angepasst werden
         Scanner scanner = new Scanner(System.in);
         short attemptTickets = 3;
         boolean loggedIn = false;
@@ -26,93 +21,63 @@ public class Main {
                 System.out.println("Benutzername oder Passwort falsch. Versuche übrig: " + attemptTickets);
             }
         }
-        LoadVehicleFeatures.LadeListen();
+
+        DatenbankManager datenbankManager = new DatenbankManager();
+        datenbankManager.ladeDatenbank();
 
         boolean exitProgramm = false;
 
-
         if (loggedIn) {
-
-
-
-
             while (!exitProgramm) {
+                System.out.println("Bitte wählen Sie eine Aktion:");
+                System.out.println("1. Automodell erstellen");
+                System.out.println("2. Motorradmodell erstellen");
+                System.out.println("3. Automodell aktualisieren");
+                System.out.println("4. Motorradmodell aktualisieren");
+                System.out.println("5. Automodell löschen");
+                System.out.println("6. Motorradmodell löschen");
+                System.out.println("7. Automodell suchen");
+                System.out.println("8. Motorradmodell suchen");
+                System.out.println("9. Programm beenden");
 
-//                List<Motorradmodell> motorradmodellList = new ArrayList<>();
-//                AccessFahrzeuge.loadMotorradmodelle(motorradmodellList);
-//
-//                List<Automodell> automodelleList = new ArrayList<>();
-//                AccessFahrzeuge.loadAutomodelle(automodelleList);
-//
-//                List<GeparkteAutos> geparkteAutosList = new ArrayList<>();
-//                AccessFahrzeuge.loadGeparkteAutos(geparkteAutosList);
-//
-//
-//                List<GeparkteMotorrader> geparkteMotorraderList = new ArrayList<>();
-//                AccessFahrzeuge.loadGeparkteMotorrader(geparkteMotorraderList);
+                int choice = scanner.nextInt();
+                scanner.nextLine(); // Clear the newline character
 
-//                System.out.println("Autmodell nach Nummertafel suchen -> AS"); //unfinished
-//                System.out.println("Motorradmodell nach Nummertafel suchen -> MS");  //unfinished
-//                System.out.println("Automodell löschen -> AL");         //unfinished !!!
-//                System.out.println("Motorradmodell löschen - > ML");  // unfinished!!!
-//                System.out.println("Automodell hinzufügen -> AG");
-//                System.out.println("Motorradmodell hinzufügen -> MG");
-//                System.out.println("Auto in Garage parken -> AP");
-//                System.out.println("Motorrad in Garage parken - MP");
-//                System.out.println("Auto aus Garage entfernen -> N");
-//                System.out.println("Motorrad aus Garage entfernen -> M");
-//                System.out.println("Exit -> E");
-//
-//                String choice = scanner.nextLine().toUpperCase();
-//                String nummertafel = "";
-//
-//                switch (choice) {
-//                    case "AS":
-//                        System.out.print("Geben Sie die Nummertafel: ");
-//                        nummertafel = scanner.nextLine();
-//                        AccessFahrzeuge.accessAutomodell(nummertafel);
-//                        break;
-//                    case "MS":
-//                        System.out.print("Geben Sie die Nummertafel: ");
-//                        nummertafel = scanner.nextLine();
-//                        AccessFahrzeuge.accessMotorradmodell(nummertafel);
-//                        break;
-//                    case "AL":
-//                        System.out.print("Geben Sie die Nummertafel: ");
-//                        nummertafel = scanner.nextLine();
-//                        AccessFahrzeuge.deleteAutomodell(nummertafel);
-//                        break;
-//                    case "ML":
-//                        System.out.print("Geben Sie die Nummertafel: ");
-//                        nummertafel = scanner.nextLine();
-//                        AccessFahrzeuge.deleteMotorradmodell(nummertafel);
-//                        break;
-//                    case "AG":
-//                        AccessFahrzeuge.automodellErstellen();
-//                        break;
-//                    case "MG":
-//                        AccessFahrzeuge.motorradmodellErstellen();
-//                        break;
-//                    case "AP":
-//                        AccessFahrzeuge.autoParken(automodelleList);
-//                        break;
-//                    case "MP":
-//                        AccessFahrzeuge.motorradParken(motorradmodellList);
-//                        break;
-//                    case "N":
-//                        AccessFahrzeuge.autoAusparken(geparkteAutosList);
-//                        break;
-//                    case "M":
-//                        AccessFahrzeuge.motorradAusparken(geparkteMotorraderList);
-//                        break;
-//                    case "E":
-//                        exitProgramm = true;
-//                        break;
-//                    default:
-//                        System.out.println("Ungültige Auswahl");
-//                        break;
-//                }
+                switch (choice) {
+                    case 1:
+                        datenbankManager.getAccessFahrzeuge().erstelleAutomodell();
+                        break;
+                    case 2:
+                        datenbankManager.getAccessFahrzeuge().erstelleMotorradmodell();
+                        break;
+                    case 3:
+                        datenbankManager.getAccessFahrzeuge().aktualisiereAutomodell();
+                        break;
+                    case 4:
+                        datenbankManager.getAccessFahrzeuge().aktualisiereMotorradmodell();
+                        break;
+                    case 5:
+                        datenbankManager.getAccessFahrzeuge().loescheAutomodell();
+                        break;
+                    case 6:
+                        datenbankManager.getAccessFahrzeuge().loescheMotorradmodell();
+                        break;
+                    case 7:
+                        datenbankManager.getAccessFahrzeuge().sucheAutomodell();
+                        break;
+                    case 8:
+                        datenbankManager.getAccessFahrzeuge().sucheMotorradmodell();
+                        break;
+                    case 9:
+                        exitProgramm = true;
+                        break;
+                    default:
+                        System.out.println("Ungültige Auswahl. Bitte geben Sie eine Zahl zwischen 1 und 9 ein.");
+                }
             }
+
+
+            datenbankManager.speichereDatenbank();
         }
     }
 }
