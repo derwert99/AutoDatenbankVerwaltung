@@ -10,6 +10,8 @@ public class AccessFahrzeuge {
     private List<Motorradmodell> motorradmodelleList;
     private List<Automodell> automodelleList;
 
+    Scanner scanner = new Scanner(System.in);
+
     public AccessFahrzeuge() {
         this.motorradmodelleList = new ArrayList<>();
         this.automodelleList = new ArrayList<>();
@@ -128,6 +130,8 @@ public class AccessFahrzeuge {
     public void aktualisiereMotorradmodell(String kennzeichen, String neueMarke, String neuesModell) {
 
 
+
+
         for (Motorradmodell motorradmodell : motorradmodelleList){
             if (kennzeichen.equals(motorradmodell.getKennzeichen())){
                 motorradmodell.setMarke(neueMarke);
@@ -169,7 +173,10 @@ public class AccessFahrzeuge {
 
     // todo muss noch korrigiert werden
 
-    public void aktualisiereAutomodell(String kennzeichen, String neueMarke, String neuesModell) {
+    public void aktualisiereAutomodell() {
+
+        System.out.println("Geben sie das Kennzeichen ein um Daten des Autos zu aktualsieren: ");
+        String kennzeichen = scanner.nextLine();
 
         for (Automodell automodell: automodelleList){
             if (kennzeichen.equals(automodell.getKennzeichen())){
@@ -210,11 +217,17 @@ public class AccessFahrzeuge {
 //        }
     }
 
-    public void loescheMotorradmodell(String kennzeichen) {
+    public void loescheMotorradmodell() {
+        System.out.print("Gib Kennzeichen ein um Motorrad zu löschen: ");
+        Scanner scanner = new Scanner(System.in);
+        String kennzeichen = scanner.nextLine();
 
         for (Motorradmodell motorradmodell : motorradmodelleList){
             if (kennzeichen.equals(motorradmodell.getKennzeichen())){
                 motorradmodelleList.remove(motorradmodell);
+            }
+            else {
+                System.out.println("Kennzeichen nicht gefunden");
             }
         }
 
@@ -238,12 +251,17 @@ public class AccessFahrzeuge {
 //        }
     }
 
-    public void loescheAutomodell(String kennzeichen) {
-
+    public void loescheAutomodell() {
+        System.out.print("Gib Kennzeichen ein um Auto zu löschen: ");
+        Scanner scanner = new Scanner(System.in);
+        String kennzeichen = scanner.nextLine();
 
         for (Automodell automodell: automodelleList){
             if (kennzeichen.equals(automodell.getKennzeichen())){
                 automodelleList.remove(automodell);
+            }
+            else {
+                System.out.println("Auto wurde nicht gefunden");
             }
         }
 
@@ -278,7 +296,7 @@ public class AccessFahrzeuge {
         String farbe = scanner.nextLine();
         System.out.print("Bitte geben Sie die PS des Motorradmodells ein:");
         int ps = scanner.nextInt();
-        scanner.nextLine(); // Clear the newline character
+        scanner.nextLine();
         System.out.print("Bitte geben Sie den Kraftstoff des Motorradmodells ein:");
         String kraftstoff = scanner.nextLine();
         System.out.print("Bitte geben Sie das Getriebe des Motorradmodells ein:");
