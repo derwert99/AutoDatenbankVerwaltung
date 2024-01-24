@@ -23,6 +23,8 @@ public class Main {
             }
         }
 
+
+
         ArrayList<Motorradmodell> motorradmodelleList = new ArrayList<>();
         ArrayList<Automodell> automodelleList = new ArrayList<>();
 
