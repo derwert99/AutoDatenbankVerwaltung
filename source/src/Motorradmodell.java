@@ -14,11 +14,11 @@ public class Motorradmodell extends Motorradmarke {
         return "Motorradmodell{" +
                 "kennzeichen='" + kennzeichen + '\'' +
                 ", modell='" + modell + '\'' +
-                ", farbe='" + getFarbe() + '\'' + // hinzugefügt
-                ", ps=" + getPs() +              // hinzugefügt
-                ", kraftstoff='" + getKraftstoff() + '\'' + // hinzugefügt
-                ", getriebe='" + getGetriebe() + '\'' +     // hinzugefügt
-                ", marke='" + getMarke() + '\'' +          // hinzugefügt
+                ", farbe='" + getFarbe() + '\'' +
+                ", ps=" + getPs() +
+                ", kraftstoff='" + getKraftstoff() + '\'' +
+                ", getriebe='" + getGetriebe() + '\'' +
+                ", marke='" + getMarke() + '\'' +
                 '}';
     }
 

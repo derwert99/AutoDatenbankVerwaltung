@@ -1,10 +1,9 @@
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
 
-    public static void main(String[] args) throws SQLException {
+    public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         short attemptTickets = 3;
         boolean loggedIn = false;
@@ -22,7 +21,6 @@ public class Main {
                 System.out.println("Benutzername oder Passwort falsch. Versuche übrig: " + attemptTickets);
             }
         }
-
 
 
         ArrayList<Motorradmodell> motorradmodelleList = new ArrayList<>();
@@ -80,7 +78,6 @@ public class Main {
                         exitProgramm = true;
                         accessFahrzeuge.speichereMotorradmodelle(motorradmodelleList);
                         accessFahrzeuge.speichereAutomodelle(automodelleList);
-
                         break;
                     default:
                         System.out.println("Ungültige Auswahl. Bitte geben Sie eine Zahl zwischen 1 und 9 ein.");

@@ -6,15 +6,13 @@ import java.util.Scanner;
 
 public class AccessFahrzeuge {
 
-    private static String automodellePfad = "source/DataStore/Automodelle.db";
-    private static String motorradmodellePfad = "source/DataStore/motorradmodelle.db";
+    private static final String automodellePfad = "source/DataStore/Automodelle.db";
+    private static final String motorradmodellePfad = "source/DataStore/motorradmodelle.db";
 
     Scanner scanner = new Scanner(System.in);
 
 
-
     public void ladeMotorradmodelle(ArrayList<Motorradmodell> motorradmodelleList) {
-        List<Motorradmodell> motorradmodelle = new ArrayList<>();
 
         try (Connection connection = DriverManager.getConnection("jdbc:sqlite:" + motorradmodellePfad);
              Statement statement = connection.createStatement();
@@ -269,17 +267,14 @@ public class AccessFahrzeuge {
     }
 
 
-
     public void loescheMotorradmodell(ArrayList<Motorradmodell> motorradmodelleList) {
         System.out.print("Gib Kennzeichen ein um Motorrad zu löschen: ");
-        Scanner scanner = new Scanner(System.in);
         String kennzeichen = scanner.nextLine();
 
-        for (Motorradmodell motorradmodell : motorradmodelleList){
-            if (kennzeichen.equals(motorradmodell.getKennzeichen())){
+        for (Motorradmodell motorradmodell : motorradmodelleList) {
+            if (kennzeichen.equals(motorradmodell.getKennzeichen())) {
                 motorradmodelleList.remove(motorradmodell);
-            }
-            else {
+            } else {
                 System.out.println("Kennzeichen nicht gefunden");
             }
         }
@@ -289,14 +284,12 @@ public class AccessFahrzeuge {
 
     public void loescheAutomodell(ArrayList<Automodell> automodelleList) {
         System.out.print("Gib Kennzeichen ein um Auto zu löschen: ");
-        Scanner scanner = new Scanner(System.in);
         String kennzeichen = scanner.nextLine();
 
-        for (Automodell automodell: automodelleList){
-            if (kennzeichen.equals(automodell.getKennzeichen())){
+        for (Automodell automodell : automodelleList) {
+            if (kennzeichen.equals(automodell.getKennzeichen())) {
                 automodelleList.remove(automodell);
-            }
-            else {
+            } else {
                 System.out.println("Auto wurde nicht gefunden");
             }
         }
@@ -305,7 +298,6 @@ public class AccessFahrzeuge {
     }
 
     public void erstelleMotorradmodell(ArrayList<Motorradmodell> motorradmodelleList) {
-        Scanner scanner = new Scanner(System.in);
         try {
             System.out.print("Bitte geben Sie das Kennzeichen des Motorradmodells ein:");
             String kennzeichen = scanner.nextLine();
@@ -337,7 +329,6 @@ public class AccessFahrzeuge {
     }
 
     public void erstelleAutomodell(ArrayList<Automodell> automodelleList) {
-        Scanner scanner = new Scanner(System.in);
         try {
             System.out.print("Bitte geben Sie das Kennzeichen des Automodells ein:");
             String kennzeichen = scanner.nextLine();
@@ -368,7 +359,6 @@ public class AccessFahrzeuge {
     }
 
     public void sucheMotorradmodell(ArrayList<Motorradmodell> motorradmodelleList) {
-        Scanner scanner = new Scanner(System.in);
         System.out.print("Bitte geben Sie das Kennzeichen des zu suchenden Motorradmodells ein:");
         String kennzeichen = scanner.nextLine();
 
@@ -384,7 +374,6 @@ public class AccessFahrzeuge {
     }
 
     public void sucheAutomodell(ArrayList<Automodell> automodelleList) {
-        Scanner scanner = new Scanner(System.in);
         System.out.print("Bitte geben Sie das Kennzeichen des zu suchenden Automodells ein:");
         String kennzeichen = scanner.nextLine();
 
