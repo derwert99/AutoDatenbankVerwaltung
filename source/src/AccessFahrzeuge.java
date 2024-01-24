@@ -127,94 +127,145 @@ public class AccessFahrzeuge {
 
     // todo muss noch korrigiert werden
 
-    public void aktualisiereMotorradmodell(String kennzeichen, String neueMarke, String neuesModell) {
+    public void aktualisiereMotorradmodell() {
+        for (Motorradmodell motorradmodell : motorradmodelleList) {
+            System.out.println(motorradmodell.getKennzeichen());
+        }
 
+        System.out.print("Welche Kennzeichen möchten Sie aktualisieren: ");
+        String kennzeichen = scanner.nextLine();
 
+        boolean found = false;
+        for (Motorradmodell motorradmodell : motorradmodelleList) {
+            if (kennzeichen.equals(motorradmodell.getKennzeichen())) {
+                found = true;
 
+                System.out.println("Aktuelle Werte:");
+                System.out.println("1. Marke: " + motorradmodell.getMarke());
+                System.out.println("2. Modell: " + motorradmodell.getModell());
+                System.out.println("3. Farbe: " + motorradmodell.getFarbe());
+                System.out.println("4. PS: " + motorradmodell.getPs());
+                System.out.println("5. Kraftstoff: " + motorradmodell.getKraftstoff());
+                System.out.println("6. Getriebe: " + motorradmodell.getGetriebe());
 
-        for (Motorradmodell motorradmodell : motorradmodelleList){
-            if (kennzeichen.equals(motorradmodell.getKennzeichen())){
-                motorradmodell.setMarke(neueMarke);
-                motorradmodell.setModell(neuesModell);
+                System.out.println("Welches Attribut möchten Sie ändern (1-6): ");
+                int choice = scanner.nextInt();
+                scanner.nextLine(); // Clear the newline character
+
+                switch (choice) {
+                    case 1:
+                        System.out.print("Neue Marke eingeben: ");
+                        String neueMarke = scanner.nextLine();
+                        motorradmodell.setMarke(neueMarke);
+                        break;
+                    case 2:
+                        System.out.print("Neues Modell eingeben: ");
+                        String neuesModell = scanner.nextLine();
+                        motorradmodell.setModell(neuesModell);
+                        break;
+                    case 3:
+                        System.out.print("Neue Farbe eingeben: ");
+                        String neueFarbe = scanner.nextLine();
+                        motorradmodell.setFarbe(neueFarbe);
+                        break;
+                    case 4:
+                        System.out.print("Neue PS eingeben: ");
+                        int neuePs = scanner.nextInt();
+                        scanner.nextLine();
+                        motorradmodell.setPs(neuePs);
+                        break;
+                    case 5:
+                        System.out.print("Neuen Kraftstoff eingeben: ");
+                        String neuerKraftstoff = scanner.nextLine();
+                        motorradmodell.setKraftstoff(neuerKraftstoff);
+                        break;
+                    case 6:
+                        System.out.print("Neues Getriebe eingeben: ");
+                        String neuesGetriebe = scanner.nextLine();
+                        motorradmodell.setGetriebe(neuesGetriebe);
+                        break;
+                    default:
+                        System.out.println("Ungültige Auswahl.");
+                }
+                break; // Exit the loop after updating
             }
         }
 
-//        String selectSql = "SELECT * FROM Motorradmodelle WHERE Kennzeichen = ?";
-//        String updateSql = "UPDATE Motorradmodelle SET Marke = ?, Modell = ? WHERE Kennzeichen = ?";
-
-//        try (Connection connection = DriverManager.getConnection("jdbc:sqlite:" + motorradmodellePfad);
-//             PreparedStatement selectStatement = connection.prepareStatement(selectSql);
-//             PreparedStatement updateStatement = connection.prepareStatement(updateSql)) {
-//
-//            selectStatement.setString(1, kennzeichen);
-//
-//            try (ResultSet resultSet = selectStatement.executeQuery()) {
-//                if (resultSet.next()) {
-//                    updateStatement.setString(1, neueMarke);
-//                    updateStatement.setString(2, neuesModell);
-//                    updateStatement.setString(3, kennzeichen);
-//
-//                    int affectedRows = updateStatement.executeUpdate();
-//
-//                    if (affectedRows > 0) {
-//                        System.out.println("Motorradmodell erfolgreich aktualisiert.");
-//                    } else {
-//                        System.out.println("Fehler beim Aktualisieren des Motorradmodells.");
-//                    }
-//                } else {
-//                    System.out.println("Motorradmodell mit dem angegebenen Kennzeichen nicht gefunden.");
-//                }
-//            }
-//
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
+        if (!found) {
+            System.out.println("Motorradmodell mit dem angegebenen Kennzeichen nicht gefunden.");
+        }
     }
+
 
     // todo muss noch korrigiert werden
 
     public void aktualisiereAutomodell() {
+        for (Automodell automodell : automodelleList) {
+            System.out.println(automodell.getKennzeichen());
+        }
 
-        System.out.println("Geben sie das Kennzeichen ein um Daten des Autos zu aktualsieren: ");
+        System.out.print("Welche Kennzeichen möchten Sie aktualisieren: ");
         String kennzeichen = scanner.nextLine();
 
-        for (Automodell automodell: automodelleList){
-            if (kennzeichen.equals(automodell.getKennzeichen())){
-                automodell.setMarke(neueMarke);
-                automodell.setModell(neuesModell);
+        boolean found = false;
+        for (Automodell automodell : automodelleList) {
+            if (kennzeichen.equals(automodell.getKennzeichen())) {
+                found = true;
+
+                System.out.println("Aktuelle Werte:");
+                System.out.println("1. Marke: " + automodell.getMarke());
+                System.out.println("2. Modell: " + automodell.getModell());
+                System.out.println("3. Farbe: " + automodell.getFarbe());
+                System.out.println("4. PS: " + automodell.getPs());
+                System.out.println("5. Kraftstoff: " + automodell.getKraftstoff());
+                System.out.println("6. Getriebe: " + automodell.getGetriebe());
+
+                System.out.println("Welches Attribut möchten Sie ändern (1-6): ");
+                int choice = scanner.nextInt();
+                scanner.nextLine(); // Clear the newline character
+
+                switch (choice) {
+                    case 1:
+                        System.out.print("Neue Marke eingeben: ");
+                        String neueMarke = scanner.nextLine();
+                        automodell.setMarke(neueMarke);
+                        break;
+                    case 2:
+                        System.out.print("Neues Modell eingeben: ");
+                        String neuesModell = scanner.nextLine();
+                        automodell.setModell(neuesModell);
+                        break;
+                    case 3:
+                        System.out.print("Neue Farbe eingeben: ");
+                        String neueFarbe = scanner.nextLine();
+                        automodell.setFarbe(neueFarbe);
+                        break;
+                    case 4:
+                        System.out.print("Neue PS eingeben: ");
+                        int neuePs = scanner.nextInt();
+                        scanner.nextLine();
+                        automodell.setPs(neuePs);
+                        break;
+                    case 5:
+                        System.out.print("Neuen Kraftstoff eingeben: ");
+                        String neuerKraftstoff = scanner.nextLine();
+                        automodell.setKraftstoff(neuerKraftstoff);
+                        break;
+                    case 6:
+                        System.out.print("Neues Getriebe eingeben: ");
+                        String neuesGetriebe = scanner.nextLine();
+                        automodell.setGetriebe(neuesGetriebe);
+                        break;
+                    default:
+                        System.out.println("Ungültige Auswahl.");
+                }
+                break; // Exit the loop after updating
             }
         }
 
-//        String selectSql = "SELECT * FROM Automodelle WHERE Kennzeichen = ?";
-//        String updateSql = "UPDATE Automodelle SET Marke = ?, Modell = ? WHERE Kennzeichen = ?";
-//
-//        try (Connection connection = DriverManager.getConnection("jdbc:sqlite:" + automodellePfad);
-//             PreparedStatement selectStatement = connection.prepareStatement(selectSql);
-//             PreparedStatement updateStatement = connection.prepareStatement(updateSql)) {
-//
-//            selectStatement.setString(1, kennzeichen);
-//
-//            try (ResultSet resultSet = selectStatement.executeQuery()) {
-//                if (resultSet.next()) {
-//                    updateStatement.setString(1, neueMarke);
-//                    updateStatement.setString(2, neuesModell);
-//                    updateStatement.setString(3, kennzeichen);
-//
-//                    int affectedRows = updateStatement.executeUpdate();
-//
-//                    if (affectedRows > 0) {
-//                        System.out.println("Automodell erfolgreich aktualisiert.");
-//                    } else {
-//                        System.out.println("Fehler beim Aktualisieren des Automodells.");
-//                    }
-//                } else {
-//                    System.out.println("Automodell mit dem angegebenen Kennzeichen nicht gefunden.");
-//                }
-//            }
-//
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
+        if (!found) {
+            System.out.println("Automodell mit dem angegebenen Kennzeichen nicht gefunden.");
+        }
     }
 
     public void loescheMotorradmodell() {
@@ -232,23 +283,6 @@ public class AccessFahrzeuge {
         }
 
 
-//        String deleteSql = "DELETE FROM Motorradmodelle WHERE Kennzeichen = ?";
-//
-//        try (Connection connection = DriverManager.getConnection("jdbc:sqlite:" + motorradmodellePfad);
-//             PreparedStatement preparedStatement = connection.prepareStatement(deleteSql)) {
-//
-//            preparedStatement.setString(1, kennzeichen);
-//            int rowsAffected = preparedStatement.executeUpdate();
-//
-//            if (rowsAffected > 0) {
-//                System.out.println("Motorradmodell erfolgreich gelöscht.");
-//            } else {
-//                System.out.println("Motorradmodell mit dem angegebenen Kennzeichen wurde nicht gefunden.");
-//            }
-//
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
     }
 
     public void loescheAutomodell() {
@@ -265,23 +299,7 @@ public class AccessFahrzeuge {
             }
         }
 
-//        String deleteSql = "DELETE FROM Automodelle WHERE Kennzeichen = ?";
-//
-//        try (Connection connection = DriverManager.getConnection("jdbc:sqlite:" + automodellePfad);
-//             PreparedStatement preparedStatement = connection.prepareStatement(deleteSql)) {
-//
-//            preparedStatement.setString(1, kennzeichen);
-//            int rowsAffected = preparedStatement.executeUpdate();
-//
-//            if (rowsAffected > 0) {
-//                System.out.println("Automodell erfolgreich gelöscht.");
-//            } else {
-//                System.out.println("Automodell mit dem angegebenen Kennzeichen wurde nicht gefunden.");
-//            }
-//
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
+
     }
 
     public void erstelleMotorradmodell() {

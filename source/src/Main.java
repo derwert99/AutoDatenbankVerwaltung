@@ -75,8 +75,6 @@ public class Main {
                         System.out.println("Ungültige Auswahl. Bitte geben Sie eine Zahl zwischen 1 und 9 ein.");
                 }
             }
-
-
             datenbankManager.speichereDatenbank();
         }
     }

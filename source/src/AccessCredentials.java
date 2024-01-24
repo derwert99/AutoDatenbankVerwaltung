@@ -1,24 +1,21 @@
-import java.io.InputStream;
 import java.sql.*;
 
 public class AccessCredentials {
 
-
     public static boolean checkCredentials(String username, String password) {
 
-        InputStream credentialsStream = AccessCredentials.class.getClassLoader().getResourceAsStream("DataStore/credentials.db");
+        // Pfad zur credentials.db-Datei
+        String dbPath = "source/DataStore/credentials.db";
 
-        if (credentialsStream == null) {
-            System.err.println("Fehler beim Laden der credentials.db-Datei.");
+        // Laden der JDBC-Treiberklasse
+        try {
+            Class.forName("org.sqlite.JDBC");
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
             return false;
         }
 
-
-        //Verfügbare Credentials, es sei denn, jemand hat andere hinzugefügt
-        // Thomas Kirschner|password123
-        // Benjamin Böhm|password123
-
-        String jdbcUrl = "jdbc:sqlite::memory:";
+        String jdbcUrl = "jdbc:sqlite:" + dbPath;
 
         String sql = "SELECT * FROM users WHERE username = ? AND password = ?";
 
@@ -43,5 +40,4 @@ public class AccessCredentials {
 
         return false;
     }
-
 }
