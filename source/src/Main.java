@@ -70,12 +70,13 @@ public class Main {
                         break;
                     case 9:
                         exitProgramm = true;
+                        datenbankManager.speichereDatenbank();
                         break;
                     default:
                         System.out.println("Ungültige Auswahl. Bitte geben Sie eine Zahl zwischen 1 und 9 ein.");
                 }
             }
-            datenbankManager.speichereDatenbank();
+
         }
     }
 }

@@ -1,20 +1,28 @@
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
 public class AccessFahrzeuge {
 
-    private static String automodellePfad = "source/DataStore/automodelle.db";
+    private static String automodellePfad = "source/DataStore/Automodelle.db";
     private static String motorradmodellePfad = "source/DataStore/motorradmodelle.db";
-    private List<Motorradmodell> motorradmodelleList;
-    private List<Automodell> automodelleList;
+    private ArrayList<Motorradmodell> motorradmodelleList;
+    private ArrayList<Automodell> automodelleList;
 
     Scanner scanner = new Scanner(System.in);
 
     public AccessFahrzeuge() {
         this.motorradmodelleList = new ArrayList<>();
         this.automodelleList = new ArrayList<>();
+    }
+
+    @Override
+    public String toString() {
+        return "AccessFahrzeuge{" +
+                "scanner=" + scanner +
+                '}';
     }
 
     public List<Motorradmodell> ladeMotorradmodelle() {
@@ -36,6 +44,7 @@ public class AccessFahrzeuge {
                 Motorradmodell motorradmodell = new Motorradmodell(kennzeichen, marke, modell, farbe, ps, kraftstoff, getriebe);
                 motorradmodelle.add(motorradmodell);
             }
+            connection.close();
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -63,6 +72,7 @@ public class AccessFahrzeuge {
                 Automodell automodell = new Automodell(kennzeichen, marke, modell, farbe, ps, kraftstoff, getriebe);
                 automodelle.add(automodell);
             }
+            connection.close();
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -92,9 +102,10 @@ public class AccessFahrzeuge {
 
                 insertStatement.executeUpdate();
             }
-
+            connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
+
         }
     }
 
@@ -119,6 +130,7 @@ public class AccessFahrzeuge {
 
                 insertStatement.executeUpdate();
             }
+            connection.close();
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -304,48 +316,66 @@ public class AccessFahrzeuge {
 
     public void erstelleMotorradmodell() {
         Scanner scanner = new Scanner(System.in);
-        System.out.print("Bitte geben Sie das Kennzeichen des Motorradmodells ein:");
-        String kennzeichen = scanner.nextLine();
-        System.out.print("Bitte geben Sie die Marke des Motorradmodells ein:");
-        String marke = scanner.nextLine();
-        System.out.print("Bitte geben Sie das Modell des Motorradmodells ein:");
-        String modell = scanner.nextLine();
-        System.out.print("Bitte geben Sie die Farbe des Motorradmodells ein:");
-        String farbe = scanner.nextLine();
-        System.out.print("Bitte geben Sie die PS des Motorradmodells ein:");
-        int ps = scanner.nextInt();
-        scanner.nextLine();
-        System.out.print("Bitte geben Sie den Kraftstoff des Motorradmodells ein:");
-        String kraftstoff = scanner.nextLine();
-        System.out.print("Bitte geben Sie das Getriebe des Motorradmodells ein:");
-        String getriebe = scanner.nextLine();
+        try {
+            System.out.print("Bitte geben Sie das Kennzeichen des Motorradmodells ein:");
+            String kennzeichen = scanner.nextLine();
+            System.out.print("Bitte geben Sie die Marke des Motorradmodells ein:");
+            String marke = scanner.nextLine();
+            System.out.print("Bitte geben Sie das Modell des Motorradmodells ein:");
+            String modell = scanner.nextLine();
+            System.out.print("Bitte geben Sie die Farbe des Motorradmodells ein:");
+            String farbe = scanner.nextLine();
+            System.out.print("Bitte geben Sie die PS des Motorradmodells ein:");
+            int ps = scanner.nextInt();
+            scanner.nextLine();
+            if (ps <= 0) {
+                throw new InputMismatchException("Die PS müssen eine positive ganze Zahl sein.");
+            }
+            System.out.print("Bitte geben Sie den Kraftstoff des Motorradmodells ein:");
+            String kraftstoff = scanner.nextLine();
+            System.out.print("Bitte geben Sie das Getriebe des Motorradmodells ein:");
+            String getriebe = scanner.nextLine();
 
-        Motorradmodell motorradmodell = new Motorradmodell(kennzeichen, marke, modell, farbe, ps, kraftstoff, getriebe);
-        motorradmodelleList.add(motorradmodell);
-        System.out.println("Motorradmodell erfolgreich erstellt.");
+            Motorradmodell motorradmodell = new Motorradmodell(kennzeichen, marke, modell, farbe, ps, kraftstoff, getriebe);
+            motorradmodelleList.add(motorradmodell);
+            System.out.println("Motorradmodell erfolgreich erstellt.");
+
+        } catch (InputMismatchException e) {
+            System.out.println("Fehler bei der Eingabe der PS");
+
+        }
     }
 
     public void erstelleAutomodell() {
         Scanner scanner = new Scanner(System.in);
-        System.out.print("Bitte geben Sie das Kennzeichen des Automodells ein:");
-        String kennzeichen = scanner.nextLine();
-        System.out.print("Bitte geben Sie die Marke des Automodells ein:");
-        String marke = scanner.nextLine();
-        System.out.print("Bitte geben Sie das Modell des Automodells ein:");
-        String modell = scanner.nextLine();
-        System.out.print("Bitte geben Sie die Farbe des Automodells ein:");
-        String farbe = scanner.nextLine();
-        System.out.print("Bitte geben Sie die PS des Automodells ein:");
-        int ps = scanner.nextInt();
-        scanner.nextLine(); // Clear the newline character
-        System.out.print("Bitte geben Sie den Kraftstoff des Automodells ein:");
-        String kraftstoff = scanner.nextLine();
-        System.out.print("Bitte geben Sie das Getriebe des Automodells ein:");
-        String getriebe = scanner.nextLine();
+        try {
+            System.out.print("Bitte geben Sie das Kennzeichen des Automodells ein:");
+            String kennzeichen = scanner.nextLine();
+            System.out.print("Bitte geben Sie die Marke des Automodells ein:");
+            String marke = scanner.nextLine();
+            System.out.print("Bitte geben Sie das Modell des Automodells ein:");
+            String modell = scanner.nextLine();
+            System.out.print("Bitte geben Sie die Farbe des Automodells ein:");
+            String farbe = scanner.nextLine();
+            System.out.print("Bitte geben Sie die PS des Automodells ein:");
+            int ps = scanner.nextInt();
+            scanner.nextLine(); // Clear the newline character
+            if (ps <= 0) {
+                throw new InputMismatchException("Die PS müssen eine positive ganze Zahl sein.");
+            }
+            System.out.print("Bitte geben Sie den Kraftstoff des Automodells ein:");
+            String kraftstoff = scanner.nextLine();
+            System.out.print("Bitte geben Sie das Getriebe des Automodells ein:");
+            String getriebe = scanner.nextLine();
 
-        Automodell automodell = new Automodell(kennzeichen, marke, modell, farbe, ps, kraftstoff, getriebe);
-        automodelleList.add(automodell);
-        System.out.println("Automodell erfolgreich erstellt.");
+            Automodell automodell = new Automodell(kennzeichen, marke, modell, farbe, ps, kraftstoff, getriebe);
+            automodelleList.add(automodell);
+            System.out.println("Automodell erfolgreich erstellt.");
+
+        } catch (InputMismatchException e) {
+            System.out.println("Fehler bei der Eingabe der PS");
+            // Hier könnten Sie weitere Aktionen vornehmen oder einfach die Methode verlassen.
+        }
     }
 
     public void sucheMotorradmodell() {

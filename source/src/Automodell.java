@@ -9,6 +9,19 @@ public class Automodell extends Automarke {
         this.modell = modell;
     }
 
+    @Override
+    public String toString() {
+        return "Automodell{" +
+                "kennzeichen='" + kennzeichen + '\'' +
+                ", modell='" + modell + '\'' +
+                ", farbe='" + getFarbe() + '\'' + // hinzugefügt
+                ", ps=" + getPs() +              // hinzugefügt
+                ", kraftstoff='" + getKraftstoff() + '\'' + // hinzugefügt
+                ", getriebe='" + getGetriebe() + '\'' +     // hinzugefügt
+                ", marke='" + getMarke() + '\'' +          // hinzugefügt
+                '}';
+    }
+
     public String getKennzeichen() {
         return kennzeichen;
     }
