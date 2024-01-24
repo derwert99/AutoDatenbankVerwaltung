@@ -6,15 +6,14 @@ import java.util.Scanner;
 
 public class AccessFahrzeuge {
 
-    private static String automodellePfad = "source/DataStore/Automodelle.db";
-    private static String motorradmodellePfad = "source/DataStore/motorradmodelle.db";
+    private static final String automodellePfad = "source/DataStore/Automodelle.db";
+    private static final String motorradmodellePfad = "source/DataStore/motorradmodelle.db";
 
     Scanner scanner = new Scanner(System.in);
 
 
 
     public void ladeMotorradmodelle(ArrayList<Motorradmodell> motorradmodelleList) {
-        List<Motorradmodell> motorradmodelle = new ArrayList<>();
 
         try (Connection connection = DriverManager.getConnection("jdbc:sqlite:" + motorradmodellePfad);
              Statement statement = connection.createStatement();
