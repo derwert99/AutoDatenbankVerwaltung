@@ -126,111 +126,144 @@ public class AccessFahrzeuge {
     // todo muss noch korrigiert werden
 
     public void aktualisiereMotorradmodell(String kennzeichen, String neueMarke, String neuesModell) {
-        String selectSql = "SELECT * FROM Motorradmodelle WHERE Kennzeichen = ?";
-        String updateSql = "UPDATE Motorradmodelle SET Marke = ?, Modell = ? WHERE Kennzeichen = ?";
 
-        try (Connection connection = DriverManager.getConnection("jdbc:sqlite:" + motorradmodellePfad);
-             PreparedStatement selectStatement = connection.prepareStatement(selectSql);
-             PreparedStatement updateStatement = connection.prepareStatement(updateSql)) {
 
-            selectStatement.setString(1, kennzeichen);
-
-            try (ResultSet resultSet = selectStatement.executeQuery()) {
-                if (resultSet.next()) {
-                    updateStatement.setString(1, neueMarke);
-                    updateStatement.setString(2, neuesModell);
-                    updateStatement.setString(3, kennzeichen);
-
-                    int affectedRows = updateStatement.executeUpdate();
-
-                    if (affectedRows > 0) {
-                        System.out.println("Motorradmodell erfolgreich aktualisiert.");
-                    } else {
-                        System.out.println("Fehler beim Aktualisieren des Motorradmodells.");
-                    }
-                } else {
-                    System.out.println("Motorradmodell mit dem angegebenen Kennzeichen nicht gefunden.");
-                }
+        for (Motorradmodell motorradmodell : motorradmodelleList){
+            if (kennzeichen.equals(motorradmodell.getKennzeichen())){
+                motorradmodell.setMarke(neueMarke);
+                motorradmodell.setModell(neuesModell);
             }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
         }
+
+//        String selectSql = "SELECT * FROM Motorradmodelle WHERE Kennzeichen = ?";
+//        String updateSql = "UPDATE Motorradmodelle SET Marke = ?, Modell = ? WHERE Kennzeichen = ?";
+
+//        try (Connection connection = DriverManager.getConnection("jdbc:sqlite:" + motorradmodellePfad);
+//             PreparedStatement selectStatement = connection.prepareStatement(selectSql);
+//             PreparedStatement updateStatement = connection.prepareStatement(updateSql)) {
+//
+//            selectStatement.setString(1, kennzeichen);
+//
+//            try (ResultSet resultSet = selectStatement.executeQuery()) {
+//                if (resultSet.next()) {
+//                    updateStatement.setString(1, neueMarke);
+//                    updateStatement.setString(2, neuesModell);
+//                    updateStatement.setString(3, kennzeichen);
+//
+//                    int affectedRows = updateStatement.executeUpdate();
+//
+//                    if (affectedRows > 0) {
+//                        System.out.println("Motorradmodell erfolgreich aktualisiert.");
+//                    } else {
+//                        System.out.println("Fehler beim Aktualisieren des Motorradmodells.");
+//                    }
+//                } else {
+//                    System.out.println("Motorradmodell mit dem angegebenen Kennzeichen nicht gefunden.");
+//                }
+//            }
+//
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
     }
 
     // todo muss noch korrigiert werden
 
     public void aktualisiereAutomodell(String kennzeichen, String neueMarke, String neuesModell) {
-        String selectSql = "SELECT * FROM Automodelle WHERE Kennzeichen = ?";
-        String updateSql = "UPDATE Automodelle SET Marke = ?, Modell = ? WHERE Kennzeichen = ?";
 
-        try (Connection connection = DriverManager.getConnection("jdbc:sqlite:" + automodellePfad);
-             PreparedStatement selectStatement = connection.prepareStatement(selectSql);
-             PreparedStatement updateStatement = connection.prepareStatement(updateSql)) {
-
-            selectStatement.setString(1, kennzeichen);
-
-            try (ResultSet resultSet = selectStatement.executeQuery()) {
-                if (resultSet.next()) {
-                    updateStatement.setString(1, neueMarke);
-                    updateStatement.setString(2, neuesModell);
-                    updateStatement.setString(3, kennzeichen);
-
-                    int affectedRows = updateStatement.executeUpdate();
-
-                    if (affectedRows > 0) {
-                        System.out.println("Automodell erfolgreich aktualisiert.");
-                    } else {
-                        System.out.println("Fehler beim Aktualisieren des Automodells.");
-                    }
-                } else {
-                    System.out.println("Automodell mit dem angegebenen Kennzeichen nicht gefunden.");
-                }
+        for (Automodell automodell: automodelleList){
+            if (kennzeichen.equals(automodell.getKennzeichen())){
+                automodell.setMarke(neueMarke);
+                automodell.setModell(neuesModell);
             }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
         }
+
+//        String selectSql = "SELECT * FROM Automodelle WHERE Kennzeichen = ?";
+//        String updateSql = "UPDATE Automodelle SET Marke = ?, Modell = ? WHERE Kennzeichen = ?";
+//
+//        try (Connection connection = DriverManager.getConnection("jdbc:sqlite:" + automodellePfad);
+//             PreparedStatement selectStatement = connection.prepareStatement(selectSql);
+//             PreparedStatement updateStatement = connection.prepareStatement(updateSql)) {
+//
+//            selectStatement.setString(1, kennzeichen);
+//
+//            try (ResultSet resultSet = selectStatement.executeQuery()) {
+//                if (resultSet.next()) {
+//                    updateStatement.setString(1, neueMarke);
+//                    updateStatement.setString(2, neuesModell);
+//                    updateStatement.setString(3, kennzeichen);
+//
+//                    int affectedRows = updateStatement.executeUpdate();
+//
+//                    if (affectedRows > 0) {
+//                        System.out.println("Automodell erfolgreich aktualisiert.");
+//                    } else {
+//                        System.out.println("Fehler beim Aktualisieren des Automodells.");
+//                    }
+//                } else {
+//                    System.out.println("Automodell mit dem angegebenen Kennzeichen nicht gefunden.");
+//                }
+//            }
+//
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
     }
 
     public void loescheMotorradmodell(String kennzeichen) {
-        String deleteSql = "DELETE FROM Motorradmodelle WHERE Kennzeichen = ?";
 
-        try (Connection connection = DriverManager.getConnection("jdbc:sqlite:" + motorradmodellePfad);
-             PreparedStatement preparedStatement = connection.prepareStatement(deleteSql)) {
-
-            preparedStatement.setString(1, kennzeichen);
-            int rowsAffected = preparedStatement.executeUpdate();
-
-            if (rowsAffected > 0) {
-                System.out.println("Motorradmodell erfolgreich gelöscht.");
-            } else {
-                System.out.println("Motorradmodell mit dem angegebenen Kennzeichen wurde nicht gefunden.");
+        for (Motorradmodell motorradmodell : motorradmodelleList){
+            if (kennzeichen.equals(motorradmodell.getKennzeichen())){
+                motorradmodelleList.remove(motorradmodell);
             }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
         }
+
+
+//        String deleteSql = "DELETE FROM Motorradmodelle WHERE Kennzeichen = ?";
+//
+//        try (Connection connection = DriverManager.getConnection("jdbc:sqlite:" + motorradmodellePfad);
+//             PreparedStatement preparedStatement = connection.prepareStatement(deleteSql)) {
+//
+//            preparedStatement.setString(1, kennzeichen);
+//            int rowsAffected = preparedStatement.executeUpdate();
+//
+//            if (rowsAffected > 0) {
+//                System.out.println("Motorradmodell erfolgreich gelöscht.");
+//            } else {
+//                System.out.println("Motorradmodell mit dem angegebenen Kennzeichen wurde nicht gefunden.");
+//            }
+//
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
     }
 
     public void loescheAutomodell(String kennzeichen) {
-        String deleteSql = "DELETE FROM Automodelle WHERE Kennzeichen = ?";
 
-        try (Connection connection = DriverManager.getConnection("jdbc:sqlite:" + automodellePfad);
-             PreparedStatement preparedStatement = connection.prepareStatement(deleteSql)) {
 
-            preparedStatement.setString(1, kennzeichen);
-            int rowsAffected = preparedStatement.executeUpdate();
-
-            if (rowsAffected > 0) {
-                System.out.println("Automodell erfolgreich gelöscht.");
-            } else {
-                System.out.println("Automodell mit dem angegebenen Kennzeichen wurde nicht gefunden.");
+        for (Automodell automodell: automodelleList){
+            if (kennzeichen.equals(automodell.getKennzeichen())){
+                automodelleList.remove(automodell);
             }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
         }
+
+//        String deleteSql = "DELETE FROM Automodelle WHERE Kennzeichen = ?";
+//
+//        try (Connection connection = DriverManager.getConnection("jdbc:sqlite:" + automodellePfad);
+//             PreparedStatement preparedStatement = connection.prepareStatement(deleteSql)) {
+//
+//            preparedStatement.setString(1, kennzeichen);
+//            int rowsAffected = preparedStatement.executeUpdate();
+//
+//            if (rowsAffected > 0) {
+//                System.out.println("Automodell erfolgreich gelöscht.");
+//            } else {
+//                System.out.println("Automodell mit dem angegebenen Kennzeichen wurde nicht gefunden.");
+//            }
+//
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
     }
 
     public void erstelleMotorradmodell() {
