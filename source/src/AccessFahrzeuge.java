@@ -8,24 +8,12 @@ public class AccessFahrzeuge {
 
     private static String automodellePfad = "source/DataStore/Automodelle.db";
     private static String motorradmodellePfad = "source/DataStore/motorradmodelle.db";
-    private ArrayList<Motorradmodell> motorradmodelleList;
-    private ArrayList<Automodell> automodelleList;
 
     Scanner scanner = new Scanner(System.in);
 
-    public AccessFahrzeuge() {
-        this.motorradmodelleList = new ArrayList<>();
-        this.automodelleList = new ArrayList<>();
-    }
 
-    @Override
-    public String toString() {
-        return "AccessFahrzeuge{" +
-                "scanner=" + scanner +
-                '}';
-    }
 
-    public List<Motorradmodell> ladeMotorradmodelle() {
+    public void ladeMotorradmodelle(ArrayList<Motorradmodell> motorradmodelleList) {
         List<Motorradmodell> motorradmodelle = new ArrayList<>();
 
         try (Connection connection = DriverManager.getConnection("jdbc:sqlite:" + motorradmodellePfad);
@@ -42,20 +30,16 @@ public class AccessFahrzeuge {
                 String getriebe = resultSet.getString("Getriebe");
 
                 Motorradmodell motorradmodell = new Motorradmodell(kennzeichen, marke, modell, farbe, ps, kraftstoff, getriebe);
-                motorradmodelle.add(motorradmodell);
+                motorradmodelleList.add(motorradmodell);
             }
             connection.close();
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
-        return motorradmodelle;
     }
 
-    public List<Automodell> ladeAutomodelle() {
-        List<Automodell> automodelle = new ArrayList<>();
-
+    public void ladeAutomodelle(ArrayList<Automodell> automodelleList) {
         try (Connection connection = DriverManager.getConnection("jdbc:sqlite:" + automodellePfad);
              Statement statement = connection.createStatement();
              ResultSet resultSet = statement.executeQuery("SELECT * FROM Automodelle")) {
@@ -70,7 +54,7 @@ public class AccessFahrzeuge {
                 String getriebe = resultSet.getString("Getriebe");
 
                 Automodell automodell = new Automodell(kennzeichen, marke, modell, farbe, ps, kraftstoff, getriebe);
-                automodelle.add(automodell);
+                automodelleList.add(automodell);
             }
             connection.close();
 
@@ -78,7 +62,6 @@ public class AccessFahrzeuge {
             e.printStackTrace();
         }
 
-        return automodelle;
     }
 
     public void speichereMotorradmodelle(List<Motorradmodell> motorradmodelle) {
@@ -137,9 +120,8 @@ public class AccessFahrzeuge {
         }
     }
 
-    // todo muss noch korrigiert werden
 
-    public void aktualisiereMotorradmodell() {
+    public void aktualisiereMotorradmodell(ArrayList<Motorradmodell> motorradmodelleList) {
         for (Motorradmodell motorradmodell : motorradmodelleList) {
             System.out.println(motorradmodell.getKennzeichen());
         }
@@ -162,44 +144,49 @@ public class AccessFahrzeuge {
 
                 System.out.println("Welches Attribut möchten Sie ändern (1-6): ");
                 int choice = scanner.nextInt();
-                scanner.nextLine(); // Clear the newline character
+                scanner.nextLine();
 
-                switch (choice) {
-                    case 1:
-                        System.out.print("Neue Marke eingeben: ");
-                        String neueMarke = scanner.nextLine();
-                        motorradmodell.setMarke(neueMarke);
-                        break;
-                    case 2:
-                        System.out.print("Neues Modell eingeben: ");
-                        String neuesModell = scanner.nextLine();
-                        motorradmodell.setModell(neuesModell);
-                        break;
-                    case 3:
-                        System.out.print("Neue Farbe eingeben: ");
-                        String neueFarbe = scanner.nextLine();
-                        motorradmodell.setFarbe(neueFarbe);
-                        break;
-                    case 4:
-                        System.out.print("Neue PS eingeben: ");
-                        int neuePs = scanner.nextInt();
-                        scanner.nextLine();
-                        motorradmodell.setPs(neuePs);
-                        break;
-                    case 5:
-                        System.out.print("Neuen Kraftstoff eingeben: ");
-                        String neuerKraftstoff = scanner.nextLine();
-                        motorradmodell.setKraftstoff(neuerKraftstoff);
-                        break;
-                    case 6:
-                        System.out.print("Neues Getriebe eingeben: ");
-                        String neuesGetriebe = scanner.nextLine();
-                        motorradmodell.setGetriebe(neuesGetriebe);
-                        break;
-                    default:
-                        System.out.println("Ungültige Auswahl.");
+                try {
+                    switch (choice) {
+                        case 1:
+                            System.out.print("Neue Marke eingeben: ");
+                            String neueMarke = scanner.nextLine();
+                            motorradmodell.setMarke(neueMarke);
+                            break;
+                        case 2:
+                            System.out.print("Neues Modell eingeben: ");
+                            String neuesModell = scanner.nextLine();
+                            motorradmodell.setModell(neuesModell);
+                            break;
+                        case 3:
+                            System.out.print("Neue Farbe eingeben: ");
+                            String neueFarbe = scanner.nextLine();
+                            motorradmodell.setFarbe(neueFarbe);
+                            break;
+                        case 4:
+                            System.out.print("Neue PS eingeben: ");
+                            int neuePs = scanner.nextInt();
+                            scanner.nextLine();
+                            motorradmodell.setPs(neuePs);
+                            break;
+                        case 5:
+                            System.out.print("Neuen Kraftstoff eingeben: ");
+                            String neuerKraftstoff = scanner.nextLine();
+                            motorradmodell.setKraftstoff(neuerKraftstoff);
+                            break;
+                        case 6:
+                            System.out.print("Neues Getriebe eingeben: ");
+                            String neuesGetriebe = scanner.nextLine();
+                            motorradmodell.setGetriebe(neuesGetriebe);
+                            break;
+                        default:
+                            System.out.println("Ungültige Auswahl.");
+                    }
+                } catch (InputMismatchException e) {
+                    System.out.println("Fehler bei der Eingabe: " + e.getMessage());
+                    scanner.nextLine();
                 }
-                break; // Exit the loop after updating
+                break;
             }
         }
 
@@ -208,10 +195,7 @@ public class AccessFahrzeuge {
         }
     }
 
-
-    // todo muss noch korrigiert werden
-
-    public void aktualisiereAutomodell() {
+    public void aktualisiereAutomodell(ArrayList<Automodell> automodelleList) {
         for (Automodell automodell : automodelleList) {
             System.out.println(automodell.getKennzeichen());
         }
@@ -236,51 +220,57 @@ public class AccessFahrzeuge {
                 int choice = scanner.nextInt();
                 scanner.nextLine(); // Clear the newline character
 
-                switch (choice) {
-                    case 1:
-                        System.out.print("Neue Marke eingeben: ");
-                        String neueMarke = scanner.nextLine();
-                        automodell.setMarke(neueMarke);
-                        break;
-                    case 2:
-                        System.out.print("Neues Modell eingeben: ");
-                        String neuesModell = scanner.nextLine();
-                        automodell.setModell(neuesModell);
-                        break;
-                    case 3:
-                        System.out.print("Neue Farbe eingeben: ");
-                        String neueFarbe = scanner.nextLine();
-                        automodell.setFarbe(neueFarbe);
-                        break;
-                    case 4:
-                        System.out.print("Neue PS eingeben: ");
-                        int neuePs = scanner.nextInt();
-                        scanner.nextLine();
-                        automodell.setPs(neuePs);
-                        break;
-                    case 5:
-                        System.out.print("Neuen Kraftstoff eingeben: ");
-                        String neuerKraftstoff = scanner.nextLine();
-                        automodell.setKraftstoff(neuerKraftstoff);
-                        break;
-                    case 6:
-                        System.out.print("Neues Getriebe eingeben: ");
-                        String neuesGetriebe = scanner.nextLine();
-                        automodell.setGetriebe(neuesGetriebe);
-                        break;
-                    default:
-                        System.out.println("Ungültige Auswahl.");
+                try {
+                    switch (choice) {
+                        case 1:
+                            System.out.print("Neue Marke eingeben: ");
+                            String neueMarke = scanner.nextLine();
+                            automodell.setMarke(neueMarke);
+                            break;
+                        case 2:
+                            System.out.print("Neues Modell eingeben: ");
+                            String neuesModell = scanner.nextLine();
+                            automodell.setModell(neuesModell);
+                            break;
+                        case 3:
+                            System.out.print("Neue Farbe eingeben: ");
+                            String neueFarbe = scanner.nextLine();
+                            automodell.setFarbe(neueFarbe);
+                            break;
+                        case 4:
+                            System.out.print("Neue PS eingeben: ");
+                            int neuePs = scanner.nextInt();
+                            scanner.nextLine();
+                            automodell.setPs(neuePs);
+                            break;
+                        case 5:
+                            System.out.print("Neuen Kraftstoff eingeben: ");
+                            String neuerKraftstoff = scanner.nextLine();
+                            automodell.setKraftstoff(neuerKraftstoff);
+                            break;
+                        case 6:
+                            System.out.print("Neues Getriebe eingeben: ");
+                            String neuesGetriebe = scanner.nextLine();
+                            automodell.setGetriebe(neuesGetriebe);
+                            break;
+                        default:
+                            System.out.println("Ungültige Auswahl.");
+                    }
+                } catch (InputMismatchException e) {
+                    System.out.println("Fehler bei der Eingabe: " + e.getMessage());
+                    scanner.nextLine();
                 }
-                break; // Exit the loop after updating
+                break;
             }
         }
-
         if (!found) {
             System.out.println("Automodell mit dem angegebenen Kennzeichen nicht gefunden.");
         }
     }
 
-    public void loescheMotorradmodell() {
+
+
+    public void loescheMotorradmodell(ArrayList<Motorradmodell> motorradmodelleList) {
         System.out.print("Gib Kennzeichen ein um Motorrad zu löschen: ");
         Scanner scanner = new Scanner(System.in);
         String kennzeichen = scanner.nextLine();
@@ -297,7 +287,7 @@ public class AccessFahrzeuge {
 
     }
 
-    public void loescheAutomodell() {
+    public void loescheAutomodell(ArrayList<Automodell> automodelleList) {
         System.out.print("Gib Kennzeichen ein um Auto zu löschen: ");
         Scanner scanner = new Scanner(System.in);
         String kennzeichen = scanner.nextLine();
@@ -314,7 +304,7 @@ public class AccessFahrzeuge {
 
     }
 
-    public void erstelleMotorradmodell() {
+    public void erstelleMotorradmodell(ArrayList<Motorradmodell> motorradmodelleList) {
         Scanner scanner = new Scanner(System.in);
         try {
             System.out.print("Bitte geben Sie das Kennzeichen des Motorradmodells ein:");
@@ -346,7 +336,7 @@ public class AccessFahrzeuge {
         }
     }
 
-    public void erstelleAutomodell() {
+    public void erstelleAutomodell(ArrayList<Automodell> automodelleList) {
         Scanner scanner = new Scanner(System.in);
         try {
             System.out.print("Bitte geben Sie das Kennzeichen des Automodells ein:");
@@ -374,11 +364,10 @@ public class AccessFahrzeuge {
 
         } catch (InputMismatchException e) {
             System.out.println("Fehler bei der Eingabe der PS");
-            // Hier könnten Sie weitere Aktionen vornehmen oder einfach die Methode verlassen.
         }
     }
 
-    public void sucheMotorradmodell() {
+    public void sucheMotorradmodell(ArrayList<Motorradmodell> motorradmodelleList) {
         Scanner scanner = new Scanner(System.in);
         System.out.print("Bitte geben Sie das Kennzeichen des zu suchenden Motorradmodells ein:");
         String kennzeichen = scanner.nextLine();
@@ -394,7 +383,7 @@ public class AccessFahrzeuge {
         System.out.println("Motorradmodell mit dem angegebenen Kennzeichen nicht gefunden.");
     }
 
-    public void sucheAutomodell() {
+    public void sucheAutomodell(ArrayList<Automodell> automodelleList) {
         Scanner scanner = new Scanner(System.in);
         System.out.print("Bitte geben Sie das Kennzeichen des zu suchenden Automodells ein:");
         String kennzeichen = scanner.nextLine();
@@ -410,5 +399,4 @@ public class AccessFahrzeuge {
         System.out.println("Automodell mit dem angegebenen Kennzeichen nicht gefunden.");
     }
 
-    // Weitere Methoden hier...
 }

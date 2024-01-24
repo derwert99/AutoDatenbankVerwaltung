@@ -4,10 +4,10 @@ public class AccessCredentials {
 
     public static boolean checkCredentials(String username, String password) {
 
-        // Pfad zur credentials.db-Datei
+
         String dbPath = "source/DataStore/credentials.db";
 
-        // Laden der JDBC-Treiberklasse
+
         try {
             Class.forName("org.sqlite.JDBC");
         } catch (ClassNotFoundException e) {

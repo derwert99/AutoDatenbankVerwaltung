@@ -1,4 +1,5 @@
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
@@ -22,8 +23,13 @@ public class Main {
             }
         }
 
-        DatenbankManager datenbankManager = new DatenbankManager();
-        datenbankManager.ladeDatenbank();
+        ArrayList<Motorradmodell> motorradmodelleList = new ArrayList<>();
+        ArrayList<Automodell> automodelleList = new ArrayList<>();
+
+
+        AccessFahrzeuge accessFahrzeuge = new AccessFahrzeuge();
+        accessFahrzeuge.ladeMotorradmodelle(motorradmodelleList);
+        accessFahrzeuge.ladeAutomodelle(automodelleList);
 
         boolean exitProgramm = false;
 
@@ -41,42 +47,43 @@ public class Main {
                 System.out.println("9. Programm beenden");
 
                 int choice = scanner.nextInt();
-                scanner.nextLine(); // Clear the newline character
+                scanner.nextLine();
 
                 switch (choice) {
                     case 1:
-                        datenbankManager.getAccessFahrzeuge().erstelleAutomodell();
+                        accessFahrzeuge.erstelleAutomodell(automodelleList);
                         break;
                     case 2:
-                        datenbankManager.getAccessFahrzeuge().erstelleMotorradmodell();
+                        accessFahrzeuge.erstelleMotorradmodell(motorradmodelleList);
                         break;
                     case 3:
-                        datenbankManager.getAccessFahrzeuge().aktualisiereAutomodell();
+                        accessFahrzeuge.aktualisiereAutomodell(automodelleList);
                         break;
                     case 4:
-                        datenbankManager.getAccessFahrzeuge().aktualisiereMotorradmodell();
+                        accessFahrzeuge.aktualisiereMotorradmodell(motorradmodelleList);
                         break;
                     case 5:
-                        datenbankManager.getAccessFahrzeuge().loescheAutomodell();
+                        accessFahrzeuge.loescheAutomodell(automodelleList);
                         break;
                     case 6:
-                        datenbankManager.getAccessFahrzeuge().loescheMotorradmodell();
+                        accessFahrzeuge.loescheMotorradmodell(motorradmodelleList);
                         break;
                     case 7:
-                        datenbankManager.getAccessFahrzeuge().sucheAutomodell();
+                        accessFahrzeuge.sucheAutomodell(automodelleList);
                         break;
                     case 8:
-                        datenbankManager.getAccessFahrzeuge().sucheMotorradmodell();
+                        accessFahrzeuge.sucheMotorradmodell(motorradmodelleList);
                         break;
                     case 9:
                         exitProgramm = true;
-                        datenbankManager.speichereDatenbank();
+                        accessFahrzeuge.speichereMotorradmodelle(motorradmodelleList);
+                        accessFahrzeuge.speichereAutomodelle(automodelleList);
+
                         break;
                     default:
                         System.out.println("Ungültige Auswahl. Bitte geben Sie eine Zahl zwischen 1 und 9 ein.");
                 }
             }
-
         }
     }
 }
